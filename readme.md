@@ -1,4 +1,4 @@
-# NET_TOOL README
+# NET_TOOLS README
 This Python program provides 5 Tools which can be helpful for Network Engineers!
 To Run the program on WIndows, add the NET_TOOL folder on the env path.
 Create ip.bat file( as the example provided).Then Simultaneously press the Windows and R keys

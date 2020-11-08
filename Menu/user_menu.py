@@ -11,8 +11,8 @@ def user_menu():
         user_input = input(
             "Enter:\n '1' Print IP addresses in IP range\n '2' Provide Network and Wildcard mask"
 			"\n '3' Check Ip address/mask and provide network information"
-			"\n '4' Create Subnets from Supernet: "
-			"\n '5' Subnet(Route) Summarization: "
+			"\n '4' Create Subnets from Supernet"
+			"\n '5' Subnet(Route) Summarization"
 			"\n 'q' to quit (Ctrl + C to exit at any time): ")
         while user_input != ' ':
             if user_input == '1':

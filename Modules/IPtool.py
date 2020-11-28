@@ -141,7 +141,7 @@ def Ip_address():
                                     path = input('Provide the path to the "IPranges" folder in the main  folder(copy/paste from the folder) or any folder you want:\n')
                                     path = path.split(',')
                                     dst = os.path.join(*path)
-                                    outputfile = str(date.today())
+                                    outputfile = iprange.replace('/','_')
                                     file1 = ('IP_range_' + outputfile + ".csv")
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')

@@ -27,8 +27,9 @@ class User:
 
     def subnet(self):
         try:
-            ip = IPNetwork(self.input1)
-            subnets = ip.subnet(int(self.input2))
+            global Ip		 
+            Ip = IPNetwork(self.input1)
+            subnets = Ip.subnet(int(self.input2))
             return list(subnets)
         except:
             print("\n\nIvalid Entry!. Try again...\n")
@@ -142,8 +143,8 @@ def menu_three():
 def Gen_subnets():		
         user = Path.from_input()
         path = user.path()
-        outputfile = str(date.today())
-        file1 = ('Subnets-' + outputfile + ".csv")
+        outputfile = str(Ip)
+        file1 = ('Subnets-' + outputfile.replace('/','-') + ".csv")
         f = open(file1, 'w')
         writer = csv.DictWriter(f, fieldnames=["SUBNETS", "MASK", "BROADCAST"], lineterminator='\n', delimiter=',')
         writer.writeheader()
@@ -224,7 +225,7 @@ def Ip_address():
                                     print('===' * 10)
                                     #path = path.split(',')
                                     #dst = os.path.join(*path)
-                                    outputfile = str(date.today())
+                                    outputfile = iprange.replace('/','_')
                                     file1 = ('IP_range_' + outputfile + ".csv")
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')

@@ -23,7 +23,7 @@ To avoid all the python dependancies that you need to install on your PC, you ca
 docker pull balkanbgboy/net-tool
 2.Create CSVfiles Folder on your PC
 3.Create ip.bat file and put in a folder witch in your System path
-4.Update the bat file with the following(change the path to much yours):
+4.Update the bat file with the following(change the path to match yours):
 docker run -it --rm --name net-tool-app  -v C:\Users\ivan\Desktop\CSVfiles:/app/CSVfiles f4acb5bcadec
 @pause
 5.Hit WIndow + R to get RUN and type ip and you will get the App and the Menu!

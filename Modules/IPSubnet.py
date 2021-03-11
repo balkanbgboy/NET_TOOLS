@@ -27,9 +27,8 @@ class User:
 
     def subnet(self):
         try:
-            global Ip		 
-            Ip = IPNetwork(self.input1)
-            subnets = Ip.subnet(int(self.input2))
+            ip = IPNetwork(self.input1)
+            subnets = ip.subnet(int(self.input2))
             return list(subnets)
         except:
             print("\n\nIvalid Entry!. Try again...\n")
@@ -143,8 +142,8 @@ def menu_three():
 def Gen_subnets():		
         user = Path.from_input()
         path = user.path()
-        outputfile = str(Ip)
-        file1 = ('Subnets-' + outputfile.replace('/','-') + ".csv")
+        outputfile = str(date.today())
+        file1 = ('Subnets-' + outputfile + ".csv")
         f = open(file1, 'w')
         writer = csv.DictWriter(f, fieldnames=["SUBNETS", "MASK", "BROADCAST"], lineterminator='\n', delimiter=',')
         writer.writeheader()
@@ -192,7 +191,8 @@ def Gen_subnets():
 def Ip_address():
                 try:
                     print('\n')
-                    iprange = input("Enter the IP range from the above (either format: x.x.x.x/24 or x.x.x.x/255.255.255.0): ")
+                    iprange_input = input("Enter the IP range from the above (either format: x.x.x.x/24 or x.x.x.x/255.255.255.0): ")
+                    iprange = iprange_input.strip()
                     print('---' * 30)
                     user_input = input("Enter '1' to display the file or '2' to print to csv file: ")
                     while user_input != ' ':
@@ -225,7 +225,7 @@ def Ip_address():
                                     print('===' * 10)
                                     #path = path.split(',')
                                     #dst = os.path.join(*path)
-                                    outputfile = iprange.replace('/','_')
+                                    outputfile = str(date.today())
                                     file1 = ('IP_range_' + outputfile + ".csv")
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')

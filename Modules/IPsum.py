@@ -8,10 +8,7 @@ from netaddr import *
 def Menu_tree():
 	print('   ' * 30)
 	print('===' * 30)
-	print('***' + ' This Program will summarize Subnets.Add the Subnets in Subnets.txt file in following format:\n '
-				'   10.0.0.0/30\n'
-				'    10.0.0.4/30\n'
-				'    10.0.0.8/30\n'
+	print('***' + '  This Program will summarize Subnets.Add the Subnets in Subnets.txt file.\n '
 				'    Run the program.The summary addresses will be displayed  '
 		+ '***')
 	print('===' * 30)

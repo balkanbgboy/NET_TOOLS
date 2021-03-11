@@ -45,13 +45,14 @@ def Menu_one():
 def Ip_mask():
     try:
         print('\n')
-        mask = input("Enter the Mask(example: 24):  ")
+        mask_input = input("Enter the Mask(example: 24):  ")
+        mask = mask_input.strip()
         try:
             if re.match('^\d\d?$', mask) is not None:
                 iprange = ('0.0.0.0/' + mask)
                 print('\n')
                 print('===' *10)
-                print('Subnet Mask: ' + str(IP(iprange).netmask()))
+                print('Subnet Mask: ' + str(IP(iprange).netmask()))                
                 print('===' *10)
                 subnet_calc()
             else:
@@ -73,8 +74,8 @@ def subnet_calc():
         # Checking IP address validity
         while True:
             print('\n')
-            ip_address = input("Enter an IP address: ")
-
+            ip_address_input = input("Enter an IP address: ")
+            ip_address = ip_address_input.strip()
             # Checking octets
             a = ip_address.split('.')
 

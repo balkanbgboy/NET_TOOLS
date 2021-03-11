@@ -16,7 +16,8 @@ def Ip_mask():
     try:
         print('\n')
         user_input = input(
-        "Enter:\n '1' if you want Mask to CIDR(/0 to 0.0.0.0)\n '2' for CIDR to Mask(0.0.0.0 to /0): ")        
+        "Enter:\n '1' if you want Mask to CIDR(/0 to 0.0.0.0)\n '2' for CIDR to Mask(0.0.0.0 to /0): ")
+                
         while user_input != ' ':
             if user_input == '1':
                 Mask()
@@ -36,7 +37,8 @@ def Ip_mask():
 def Mask():
     try:
         print('\n')
-        mask = input("Enter the Mask(example: 24):  ")
+        mask_input = input("Enter the Mask(example: 24):  ")
+        mask = mask_input.strip()
         try:
             if re.match('^\d\d?$', mask) is not None:
                 iprange = ('0.0.0.0/' + mask)
@@ -71,7 +73,8 @@ def Cidr():
     try:
         from netaddr.core import AddrFormatError
         print('\n')
-        cidr_user = input("Enter the CIDR(0.0.0.0 format):  ")
+        cidr_input = input("Enter the CIDR(0.0.0.0 format):  ")
+        cidr_user = cidr_input.strip()
         try:
             if re.match('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', cidr_user) is not None:
                 cidr = IPAddress(cidr_user).netmask_bits()
@@ -115,7 +118,7 @@ def Ip_address():
                             try:
                                 print('\n')
                                 if '/' in iprange:
-                                    n = ipaddress.ip_network(iprange)
+                                    n = ipaddress.ip_network(iprange.strip())
                                     first, last = n[0], n[-1]
                                     print('===' * 5 + ' ' + "Network Address: " + str(first) + ' ' + '===' * 5)
                                     print("Available adresses:")
@@ -141,7 +144,7 @@ def Ip_address():
                                     path = input('Provide the path to the "IPranges" folder in the main  folder(copy/paste from the folder) or any folder you want:\n')
                                     path = path.split(',')
                                     dst = os.path.join(*path)
-                                    outputfile = iprange.replace('/','_')
+                                    outputfile = str(date.today())
                                     file1 = ('IP_range_' + outputfile + ".csv")
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')

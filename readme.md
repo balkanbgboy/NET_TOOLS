@@ -18,7 +18,7 @@ to get RUN and just type ip.
 When saving infomration, the program is asking for path where to save the information as csv files, so just
 copy and paste the exact path from the folder( ex: C:\Users\ivan\Desktop\NET_TOOLS\IPranges)
 
-##DOCKER
+## DOCKER
 
 To avoid all the python dependancies that you need to install on your PC, you can run the programm in Docker:
  * Download the image from Docker Hub:
@@ -30,7 +30,8 @@ To avoid all the python dependancies that you need to install on your PC, you ca
    
 
 
-##ERROR
+## ERROR
+
 The container is removed once you close the Programm.However if you did not exit the program and try to run again
 you will get the following error:
  `docker: Error response from daemon: Conflict. The container name "/net-tool-app" is already....`

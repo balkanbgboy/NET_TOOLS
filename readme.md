@@ -24,7 +24,7 @@ To avoid all the python dependancies that you need to install on your PC, you ca
  * Download the image from Docker Hub:
    `docker pull balkanbgboy/net-tool`
  * Create CSVfiles Folder on your PC
- * Create ip.bat file and put in a folder witch in your System path
+ * Create ip.bat file and put in a folder witch is in your System path
  * Update the bat file with the following(change the path to match yours):
    `docker run -it --rm --name net-tool-app  -v C:\Users\ivan\Desktop\CSVfiles:/app/CSVfiles f4acb5bcadec`
    

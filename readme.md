@@ -22,7 +22,7 @@ copy and paste the exact path from the folder( ex: C:\Users\ivan\Desktop\NET_TOO
 
 To avoid all the python dependancies that you need to install on your PC, you can run the programm in Docker:
  * Download the image from Docker Hub:
-   `docker pull balkanbgboy/net-tool`
+   `docker pull balkanbgboy/net_tools:v1`
  * Create CSVfiles Folder on your PC
  * Create ip.bat file and put in a folder witch is in your System path
  * Update the bat file with the following(change the path to match yours):

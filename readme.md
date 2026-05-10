@@ -16,14 +16,8 @@ Options that produce a list of IPs or subnets can either print to the screen or 
 
 ## Requirements
 
-To avoid all the python dependancies that you need to install on your PC, you can run the programm in Docker:
- * Download the image from Docker Hub:
-   `docker pull balkanbgboy/net_tools:v1`
- * Create CSVfiles Folder on your PC
- * Create ip.bat file and put in a folder witch is in your System path
- * Update the bat file with the following(change the path to match yours):
-   `docker run -it --rm --name net-tool-app  -v C:\Users\ivan\Desktop\CSVfiles:/app/CSVfiles f4acb5bcadec`
-   
+- Python 3.8 or newer (tested on 3.11+)
+- Internet access on first run (to install dependencies)
 
 ## Run
 

@@ -48,7 +48,7 @@ def Ip_mask():
         mask_input = input("Enter the Mask(example: 24):  ")
         mask = mask_input.strip()
         try:
-            if re.match('^\d\d?$', mask) is not None:
+            if re.match(r'^\d\d?$', mask) is not None:
                 iprange = ('0.0.0.0/' + mask)
                 print('\n')
                 print('===' *10)
@@ -227,7 +227,7 @@ def subnet_calc():
         sys.exit()
 
     user_input = input(
-        "Enter:\n '1' to print the Available IPs\n '2' Go back to check another IP\n 'q' to quit: ")
+        "Enter:\n '1' to print the Available IPs\n '2' Go back to check another IP\n '3' Go back to main Menu\n 'q' to quit: ")
     while user_input != ' ':
         if user_input == '1':
             iprange = (network_address + '/' + subnet_mask)
@@ -248,12 +248,15 @@ def subnet_calc():
             sys.exit()
         elif user_input == '2':
              Menu_one()
+        elif user_input == '3':
+            from Menu.user_menu import user_menu
+            user_menu()
         elif user_input == 'q':
             sys.exit()
         else:
             print("Unknown command - try again!")
         user_input = input(
-        "Enter:\n '1' to print the Available IPs\n '2' Go back to main Menu_one\n 'q' to quit: ")
+        "Enter:\n '1' to print the Available IPs\n '2' Go back to check another IP\n '3' Go back to main Menu\n 'q' to quit: ")
 
 
 # Calling the function

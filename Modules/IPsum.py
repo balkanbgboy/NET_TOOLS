@@ -25,7 +25,8 @@ def Menu_tree():
 				print("Update the file and run the program again!!")
 				print('-------------------------------------------')
 				print('\n')
-				sys.exit()
+				from Menu.user_menu import user_menu
+				user_menu()
 			else:
 				print("Unknown command - try again!")
 			user_input = input(
@@ -36,10 +37,10 @@ def Menu_tree():
 		
 def sum():
     try:
-        path = input('Provide the path where the Subnet.txt file is(copy/paste) :\n ')
-        os.chdir(path)		
-        with open('Subnets.txt', 'r') as in_file:
-            dat_ips = [IPNetwork(line) for line in in_file.read().splitlines()]
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        subnets_file = os.path.join(project_root, 'Subnets.txt')
+        with open(subnets_file, 'r') as in_file:
+            dat_ips = [IPNetwork(line) for line in in_file.read().splitlines() if line.strip()]
         dat_merged_ips = cidr_merge(dat_ips)
         print('\n')
         print('----------------Summary address(es):')
@@ -47,8 +48,25 @@ def sum():
             print(x)
         print('------------------------------------')
         print('\n')
-        sys.exit()
-        
+        try:
+            user_input = input(
+                "Enter:\n '1' Go back to main Menu\n 'q' to quit (Ctrl + C to exit at any time): ")
+            while user_input != ' ':
+                if user_input == '1':
+                    from Menu.user_menu import user_menu
+                    user_menu()
+                elif user_input == 'q':
+                    sys.exit()
+                else:
+                    print('===' * 10)
+                    print("Ivalid Entry!. Try again...")
+                    print('===' * 10)
+                user_input = input(
+                    "Enter:\n '1' Go back to main Menu\n 'q' to quit (Ctrl + C to exit at any time): ")
+        except KeyboardInterrupt:
+            print("\n\nProgram aborted by user. Exiting...\n")
+            sys.exit()
+
     except IOError:
         print('File error detected:')
 

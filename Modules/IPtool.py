@@ -16,13 +16,16 @@ def Ip_mask():
     try:
         print('\n')
         user_input = input(
-        "Enter:\n '1' if you want Mask to CIDR(/0 to 0.0.0.0)\n '2' for CIDR to Mask(0.0.0.0 to /0): ")
-                
+        "Enter:\n '1' if you want Mask to CIDR(/0 to 0.0.0.0)\n '2' for CIDR to Mask(0.0.0.0 to /0)\n '3' Go back to main Menu: ")
+
         while user_input != ' ':
             if user_input == '1':
                 Mask()
             elif user_input == '2':
                 Cidr()
+            elif user_input == '3':
+                from Menu.user_menu import user_menu
+                user_menu()
             else:
                 print('\n')
                 print('===' * 10)
@@ -40,7 +43,7 @@ def Mask():
         mask_input = input("Enter the Mask(example: 24):  ")
         mask = mask_input.strip()
         try:
-            if re.match('^\d\d?$', mask) is not None:
+            if re.match(r'^\d\d?$', mask) is not None:
                 iprange = ('0.0.0.0/' + mask)
                 print('\n')
                 print('===' *10)
@@ -76,7 +79,7 @@ def Cidr():
         cidr_input = input("Enter the CIDR(0.0.0.0 format):  ")
         cidr_user = cidr_input.strip()
         try:
-            if re.match('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', cidr_user) is not None:
+            if re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', cidr_user) is not None:
                 cidr = IPAddress(cidr_user).netmask_bits()
                 print('\n')
                 print('====' *10)
@@ -118,7 +121,7 @@ def Ip_address():
                             try:
                                 print('\n')
                                 if '/' in iprange:
-                                    n = ipaddress.ip_network(iprange.strip())
+                                    n = ipaddress.ip_network(iprange.strip(), strict=False)
                                     first, last = n[0], n[-1]
                                     print('===' * 5 + ' ' + "Network Address: " + str(first) + ' ' + '===' * 5)
                                     print("Available adresses:")
@@ -141,18 +144,21 @@ def Ip_address():
                             try:
                                 if '/' in iprange:
                                     print('===' * 10)
+                                    from Modules.path_utils import normalize_path
                                     path = input('Provide the path to the "IPranges" folder in the main  folder(copy/paste from the folder) or any folder you want:\n')
+                                    path = normalize_path(path)
                                     path = path.split(',')
                                     dst = os.path.join(*path)
+                                    os.makedirs(dst, exist_ok=True)
                                     outputfile = str(date.today())
                                     file1 = ('IP_range_' + outputfile + ".csv")
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')
                                     writer.writeheader()
-                                    network = IP(iprange)
-                                    n = ipaddress.IPv4Network(iprange)
+                                    network = IP(iprange, make_net=True)
+                                    n = ipaddress.IPv4Network(iprange, strict=False)
                                     first, last = n[0], n[-1]
-                                    mask = str(IP(iprange).netmask())
+                                    mask = str(IP(iprange, make_net=True).netmask())
                                     f.write('{0},{1},{2},{3}\n'.format('Usable Addresses',first, last, mask))
                                     f.flush()
                                     for ip in list(network)[1:-1]:
@@ -190,10 +196,13 @@ def menu1():
     try:
         print('\n')
         user_input = input(
-            "Enter:\n '1' Print another IP range\n 'q' to quit (Ctrl + C to exit at any time): ")
+            "Enter:\n '1' Print another IP range\n '2' Go back to main Menu\n 'q' to quit (Ctrl + C to exit at any time): ")
         while user_input != ' ':
             if user_input == '1':
                 Ip_address()
+            elif user_input == '2':
+                from Menu.user_menu import user_menu
+                user_menu()
             elif user_input == 'q':
                 print('\n')
                 sys.exit()
@@ -211,10 +220,13 @@ def menu2():
     try:
         print('\n')
         user_input = input(
-            "Enter:\n '1' Print Another Mask\n 'q' to quit (Ctrl + C to exit at any time): ")
+            "Enter:\n '1' Print Another Mask\n '2' Go back to main Menu\n 'q' to quit (Ctrl + C to exit at any time): ")
         while user_input != ' ':
             if user_input == '1':
                 Ip_mask()
+            elif user_input == '2':
+                from Menu.user_menu import user_menu
+                user_menu()
             elif user_input == 'q':
                 print('\n')
                 sys.exit()

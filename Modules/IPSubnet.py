@@ -47,12 +47,14 @@ class Path:
         self.input3 = input3
     
     def path(self):
-	    path = (str(self.input3))
+	    from Modules.path_utils import normalize_path
+	    path = normalize_path(str(self.input3))
 	    path = path.split(',')
 	    global dst
 	    dst = os.path.join(*path)
+	    os.makedirs(dst, exist_ok=True)
 	    return dst
-		
+
     @classmethod
     def from_input(cls):
         return cls(
@@ -99,12 +101,15 @@ def Menu_two():
 def menu_two():
     try:
         user_input = input(
-            "Enter:\n '1' to print(save to file) the Available IPs from a range\n '2' Go back to main Menu\n 'q' to quit: ")
+            "Enter:\n '1' to print(save to file) the Available IPs from a range\n '2' Go back to Subnet menu\n '3' Go back to main Menu\n 'q' to quit: ")
         while user_input != ' ':
             if user_input == '1':
                 Ip_address()
             elif user_input == '2':
                 Menu_two()
+            elif user_input == '3':
+                from Menu.user_menu import user_menu
+                user_menu()
             elif user_input == 'q':
                 sys.exit()
             else:
@@ -112,7 +117,7 @@ def menu_two():
                 print("Unknown command - try again!")
                 print('---' * 30)
                 user_input = input(
-                  "Enter:\n '1' to print(save to file) the Available IPs from a range\n '2' Go back to main Menu\n 'q' to quit: ")
+                  "Enter:\n '1' to print(save to file) the Available IPs from a range\n '2' Go back to Subnet menu\n '3' Go back to main Menu\n 'q' to quit: ")
     except KeyboardInterrupt:
         print("\n\nProgram aborted by user. Exiting...\n")
         sys.exit()
@@ -120,12 +125,15 @@ def menu_two():
 def menu_three():
     try:
         user_input = input(
-            "Enter:\n '1' If you want to create another IP range \n '2' Go back to the menu\n 'q' to quit: ")
+            "Enter:\n '1' If you want to create another IP range \n '2' Go back to Subnet menu\n '3' Go back to main Menu\n 'q' to quit: ")
         while user_input != ' ':
             if user_input == '1':
                 Ip_address()
             elif user_input == '2':
                 Menu_two()
+            elif user_input == '3':
+                from Menu.user_menu import user_menu
+                user_menu()
             elif user_input == 'q':
                 sys.exit()
             else:
@@ -133,7 +141,7 @@ def menu_three():
                 print("Unknown command - try again!")
                 print('---' * 30)
                 user_input = input(
-                  "Enter:\n '1' If you want to create another IP range \n '2' Go back to t\n 'q' to quit: ")
+                  "Enter:\n '1' If you want to create another IP range \n '2' Go back to Subnet menu\n '3' Go back to main Menu\n 'q' to quit: ")
     except KeyboardInterrupt:
         print("\n\nProgram aborted by user. Exiting...\n")
         sys.exit()
@@ -199,7 +207,7 @@ def Ip_address():
                         if user_input == '1':
                             try:
                                 if '/' in iprange:
-                                    n = ipaddress.ip_network(iprange)
+                                    n = ipaddress.ip_network(iprange, strict=False)
                                     first, last = n[0], n[-1]
                                     print('===' * 5 + ' ' + "Network Address: " + str(first) + ' ' + '===' * 5)
                                     print("Available adresses:")
@@ -230,10 +238,10 @@ def Ip_address():
                                     f = open(file1, 'w')
                                     writer = csv.DictWriter(f, fieldnames=["  IP ADDRESSES ", "  NETWORK", "  BROADCAST", "  MASK"], lineterminator='\n', delimiter=',')
                                     writer.writeheader()
-                                    network = IP(iprange)
-                                    n = ipaddress.IPv4Network(iprange)
+                                    network = IP(iprange, make_net=True)
+                                    n = ipaddress.IPv4Network(iprange, strict=False)
                                     first, last = n[0], n[-1]
-                                    mask = str(IP(iprange).netmask())
+                                    mask = str(IP(iprange, make_net=True).netmask())
                                     f.write('{0},{1},{2},{3}\n'.format('Usable Addresses',first, last, mask))
                                     f.flush()
                                     for ip in list(network)[1:-1]:

@@ -45,4 +45,4 @@ When the program asks for a path to save CSV files (options `1`, `4`), paste any
 Option `5` reads subnet entries from `Subnets.txt` (one CIDR per line) located in the project root, then prints a summarized list of the merged ranges. Edit `Subnets.txt` before running the option.
 
 ## CONTRIBUTORS
-1. balkanbgboy
+1. imadol-ccie
